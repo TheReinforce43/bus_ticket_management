@@ -105,11 +105,11 @@ WSGI_APPLICATION = "bus_ticket_project.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": env("DB_NAME"),
-        "USER": env("DB_USER"),
-        "PASSWORD": env("DB_PASSWORD"),
-        "HOST": env("DB_HOST"),
-        "PORT": env("DB_PORT"),
+        "NAME": env("local_DB_NAME"),
+        "USER": env("local_DB_USER"),
+        "PASSWORD": env("local_DB_PASSWORD"),
+        "HOST": env("local_DB_HOST"),
+        "PORT": env("local_DB_PORT"),
     }
 }
 
@@ -150,6 +150,13 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+# Base url to serve media files
+MEDIA_URL = '/media/'
+
+# Path where media is stored'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
@@ -172,3 +179,5 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME_LATE_USER': timedelta(days=1),
     'SLIDING_TOKEN_LIFETIME_LATE_USER': timedelta(days=30),
 }
+
+AUTH_USER_MODEL = 'user.User'
