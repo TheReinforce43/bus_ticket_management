@@ -39,6 +39,8 @@ ALLOWED_HOSTS = []
 
 PROJECT_APPS = [       
     'user',
+    'location',
+
  ]
 
 DEFAULT_APPS= [
