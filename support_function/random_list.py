@@ -1,7 +1,7 @@
 
 
 user_role = (
-    ('admin', 'Admin'),
-    ('staff', 'Staff'),
-    ('passenger', 'Passenger'),
+    ('Admin', 'Admin'),
+    ('Staff', 'Staff'),
+    ('Passenger', 'Passenger'),
 )
