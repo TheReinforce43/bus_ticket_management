@@ -11,15 +11,19 @@ from  user.Serializer.user_serializer import (
 
 User = get_user_model()
 
+from rest_framework.permissions import AllowAny
+
 # User Sign Up Serializer 
 
 
 class UserSignUpAPIView(CreateAPIView):
     serializer_class= UserSignUpSerializer
     queryset= User.objects.all()
+    permission_classes = [AllowAny]
 
 
 class UserLoginAPIView(APIView):
+    permission_classes = [AllowAny]
 
     def post(self,request,*args,**kwargs):
 
