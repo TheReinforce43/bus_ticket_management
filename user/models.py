@@ -3,6 +3,7 @@ from django.db import models
 from user.custom_manager import CustomUserManager
 from django.contrib.auth.models import  AbstractUser 
 from django.utils.translation import gettext_lazy as _  
+from support_function.random_list import user_role
 
 
 
@@ -10,6 +11,7 @@ class User(AbstractUser):
     username = None
     email = models.EmailField(_("email address"), unique=True)
     image = models.ImageField(upload_to='user_images/', null=True, blank=True) 
+    role = models.CharField(max_length=20, choices=user_role, default='passenger',null=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []

@@ -11,6 +11,24 @@ class CustomUserManager(BaseUserManager):
         if not email:
             raise ValueError(_("The Email must be set"))
         email = self.normalize_email(email)
+
+        role = extra_fields.get("roles")
+
+        extra_fields.setdefault("is_active", True)
+        
+        if role == 'Passenger':
+            extra_fields.setdefault("is_staff", False)
+            extra_fields.setdefault("is_superuser", False)
+        elif role == 'Staff':
+            extra_fields.setdefault("is_staff", True)
+            extra_fields.setdefault("is_superuser", False)
+        elif role == 'Admin':
+            extra_fields.setdefault("is_staff", True)
+            extra_fields.setdefault("is_superuser", True)
+
+
+
+
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save()
