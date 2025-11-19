@@ -7,8 +7,9 @@ from rest_framework import status
 class TestUserRegisterView(APITestCase):
 
     def test_user_registration(self):
-        url = reverse("user-register")
+
+        url = reverse("user-signup")
         data = {"email": "newuser@example.com", "password": "pass123"}
         response = self.client.post(url, data, format="json")
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertTrue(User.objects.filter(email="newuser@example.com").exists())
