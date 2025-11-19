@@ -104,16 +104,42 @@ WSGI_APPLICATION = "bus_ticket_project.wsgi.application"
 
 # db PostgresSQL Set Up
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": env("local_DB_NAME"),
-        "USER": env("local_DB_USER"),
-        "PASSWORD": env("local_DB_PASSWORD"),
-        "HOST": env("local_DB_HOST"),
-        "PORT": env("local_DB_PORT"),
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql_psycopg2",
+#         "NAME": env("local_DB_NAME"),
+#         "USER": env("local_DB_USER"),
+#         "PASSWORD": env("local_DB_PASSWORD"),
+#         "HOST": env("local_DB_HOST"),
+#         "PORT": env("local_DB_PORT"),
+#     }
+# }
+
+import sys
+
+IS_TESTING = "test" in sys.argv
+
+if IS_TESTING:
+    # Use SQLite for tests
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": ":memory:",   # Fastest (in-memory DB)
+        }
     }
-}
+else:
+    # Use PostgreSQL normally
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql_psycopg2",
+            "NAME": env("local_DB_NAME"),
+            "USER": env("local_DB_USER"),
+            "PASSWORD": env("local_DB_PASSWORD"),
+            "HOST": env("local_DB_HOST"),
+            "PORT": env("local_DB_PORT"),
+        }
+    }
+
 
 
 # Password validation
