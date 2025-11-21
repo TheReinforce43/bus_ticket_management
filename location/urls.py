@@ -6,7 +6,7 @@ from location.View.location_view import ServiceDistrictViewSet
 
 router = DefaultRouter() 
 
-router.register(r'service-districts',ServiceDistrictViewSet,basename='service-districts')
+router.register(r'',ServiceDistrictViewSet,basename='service-districts')
 
 
 urlpatterns = [

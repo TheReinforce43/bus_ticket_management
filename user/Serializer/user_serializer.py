@@ -62,8 +62,9 @@ class UserLoginSerializer(serializers.Serializer):
             'first_name': user.first_name,
             'last_name': user.last_name,
             'email': user.email,
-            'refresh': str(refresh_token),
             'access': str(refresh_token.access_token),
+            'refresh': str(refresh_token),
+            'role': user.role
         }
         
 
