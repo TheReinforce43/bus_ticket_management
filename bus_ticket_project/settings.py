@@ -88,6 +88,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "bus_ticket_project.wsgi.application"
+# ASGI_APPLICATION = "bus_ticket_project.asgi.application"
+
 
 
 # Database
@@ -127,7 +129,7 @@ if IS_TESTING:
             "NAME": ":memory:",   # Fastest (in-memory DB)
         }
     }
-else:
+elif DEBUG:
     # Use PostgreSQL normally
     DATABASES = {
         "default": {
@@ -139,6 +141,13 @@ else:
             "PORT": env("local_DB_PORT"),
         }
     }
+
+else :
+    # Use live database in production
+   DATABASES = {
+    'default': env.db(),  # This will automatically parse the DATABASE_URL
+}
+
 
 
 
