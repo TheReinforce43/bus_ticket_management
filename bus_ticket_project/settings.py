@@ -31,7 +31,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool("DEBUG", default=True)
+DEBUG = env.bool("DEBUG", default=False)
 
 
 ALLOWED_HOSTS = ['*','bus-ticket-management-won6.onrender.com']
@@ -119,36 +119,43 @@ WSGI_APPLICATION = "bus_ticket_project.wsgi.application"
 #     }
 # }
 
-import sys
+# import sys
 
-IS_TESTING = "test" in sys.argv
+# IS_TESTING = "test" in sys.argv
 
-if IS_TESTING:
-    # Use SQLite for tests
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": ":memory:",   # Fastest (in-memory DB)
-        }
-    }
-elif DEBUG:
-    # Use PostgreSQL normally
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql_psycopg2",
-            "NAME": env("local_DB_NAME"),
-            "USER": env("local_DB_USER"),
-            "PASSWORD": env("local_DB_PASSWORD"),
-            "HOST": env("local_DB_HOST"),
-            "PORT": env("local_DB_PORT"),
-        }
-    }
+# if IS_TESTING:
+#     # Use SQLite for tests
+#     DATABASES = {
+#         "default": {
+#             "ENGINE": "django.db.backends.sqlite3",
+#             "NAME": ":memory:",   # Fastest (in-memory DB)
+#         }
+#     }
+# elif DEBUG:
+#     # Use PostgreSQL normally
+#     DATABASES = {
+#         "default": {
+#             "ENGINE": "django.db.backends.postgresql_psycopg2",
+#             "NAME": env("local_DB_NAME"),
+#             "USER": env("local_DB_USER"),
+#             "PASSWORD": env("local_DB_PASSWORD"),
+#             "HOST": env("local_DB_HOST"),
+#             "PORT": env("local_DB_PORT"),
+#         }
+#     }
 
-else :
-    # Use live database in production
-   DATABASES = {
+# else :
+#     # Use live database in production
+#    DATABASES = {
+#     'default': env.db(),  # This will automatically parse the DATABASE_URL
+# }
+
+
+
+DATABASES = {
     'default': env.db(),  # This will automatically parse the DATABASE_URL
 }
+
 
 
 
