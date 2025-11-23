@@ -15,12 +15,12 @@ class DistrictServiceObjectPermission(BasePermission):
     def has_object_permission(self, request, view, obj):
         user = request.user 
 
-        print(user.roles)
-        if user.roles in ['Admin']:
+        print(user.role)
+        if user.role in ['Admin']:
             return True
         
        
-        elif user.roles in ['Passenger','Staff']:
+        elif user.role in ['Passenger','Staff']:
             if request.method in SAFE_METHODS:
                 return True
         else:  
