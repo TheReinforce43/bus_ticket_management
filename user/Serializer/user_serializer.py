@@ -34,7 +34,8 @@ class UserSignUpSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         password = validated_data.pop('password')
-        role = validated_data.get("role", "Passenger")
+        # role = validated_data.get("role", "Passenger")
+        role = validated_data.pop("role", "Passenger")
 
         user = User.objects.create_user(
             role=role,
