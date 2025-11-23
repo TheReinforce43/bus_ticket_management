@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 
 class CustomUserManager(BaseUserManager):
 
-    def create_user(self, email, password, **extra_fields):
+    def create_user(self, email, password,role='Passenger' ,**extra_fields):
         """
         Create and save a user with the given email and password.
         """
@@ -12,7 +12,7 @@ class CustomUserManager(BaseUserManager):
             raise ValueError(_("The Email must be set"))
         email = self.normalize_email(email)
 
-        role = extra_fields.get("roles")
+        # role = extra_fields.get("role")
 
         extra_fields.setdefault("is_active", True)
         
@@ -26,7 +26,8 @@ class CustomUserManager(BaseUserManager):
             extra_fields.setdefault("is_staff", True)
             extra_fields.setdefault("is_superuser", True)
 
-
+        else:
+            raise ValueError(_("Invalid role specified."))
 
 
         user = self.model(email=email, **extra_fields)
@@ -38,6 +39,7 @@ class CustomUserManager(BaseUserManager):
         """
         Create and save a SuperUser with the given email and password.
         """
+        extra_fields.setdefault("role", "Admin")
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
         extra_fields.setdefault("is_active", True)
@@ -46,4 +48,11 @@ class CustomUserManager(BaseUserManager):
             raise ValueError(_("Superuser must have is_staff=True."))
         if extra_fields.get("is_superuser") is not True:
             raise ValueError(_("Superuser must have is_superuser=True."))
+        
+        if extra_fields["role"] != "Admin":
+            raise ValueError("Superuser must have role='Admin'")
+        
+        # FIX: Set role
+        
+
         return self.create_user(email, password, **extra_fields)

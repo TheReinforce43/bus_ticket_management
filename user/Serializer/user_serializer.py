@@ -17,13 +17,32 @@ class UserSignUpSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'email', 'password', 'first_name', 'last_name', 'image']
+        fields = ['id', 'email', 'password', 'first_name', 'last_name', 'image','role']
+
+    def validate_role(self,value):
+
+        valid_roles = ['Staff', 'Passenger','Admin']
+        if value == "Admin":
+            raise serializers.ValidationError("Admin account cannot be created via signup.")
+        
+        elif value not in valid_roles:
+            raise serializers.ValidationError("Invalid role specified.")
+        
+        
+        return value
+       
 
     def create(self, validated_data):
         password = validated_data.pop('password')
-        user = User(**validated_data)
-        user.set_password(password)
-        user.save()
+        role = validated_data.get("role", "Passenger")
+
+        user = User.objects.create_user(
+            role=role,
+            password=password,
+            **validated_data
+        )
+
+       
         return user
 
 # this serializer is for user login 
