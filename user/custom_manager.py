@@ -30,7 +30,8 @@ class CustomUserManager(BaseUserManager):
             raise ValueError(_("Invalid role specified."))
 
 
-        user = self.model(email=email, **extra_fields)
+        user = self.model(email=email, role=role,
+        **extra_fields)
         user.set_password(password)
         user.save()
         return user
