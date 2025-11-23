@@ -18,6 +18,10 @@ class UserSignUpSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'email', 'password', 'first_name', 'last_name', 'image','role']
+        extra_kwargs = {
+            'password': {'write_only': True}
+        }
+
 
     def validate_role(self,value):
 
@@ -30,6 +34,13 @@ class UserSignUpSerializer(serializers.ModelSerializer):
         
         
         return value
+    
+    def validate_password(self,value):
+        if len(value) < 3:
+            raise serializers.ValidationError("Password must be at least 3 characters long.")
+        return value
+
+
        
 
     def create(self, validated_data):

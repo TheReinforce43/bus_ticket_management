@@ -15,9 +15,7 @@ class TestUserProfileSerializer(TestCase):
         )
 
         serializer = UserProfileSerializer(user_instance)
-        # self.assertTrue(serializer.is_valid()) 
-        # self.assertEqual(serializer.data['email'],user_instance.email)
-        # user = serializer.save()
+       
 
 
         self.assertEqual(serializer.data['email'], user_instance.email)
@@ -26,7 +24,7 @@ class TestUserProfileSerializer(TestCase):
     def test_invalid_user_profile_serializer(self):
         invalid_data = {
             'email': 'invalidemilgmail.com',
-            'password': '123',
+            'password': '',
         }
 
         serializer = UserProfileSerializer(data=invalid_data)

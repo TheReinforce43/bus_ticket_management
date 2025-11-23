@@ -23,7 +23,8 @@ This project uses the following technologies:
 - User authentication and role-based access control  
 - Real-time ticket booking and availability updates  
 - Background task processing with Celery  
-- Containerized environment for easy deployment  
+- Containerized environment for easy deployment 
+- Adding Proper testing using Django default unit test 
 
 ---
 
