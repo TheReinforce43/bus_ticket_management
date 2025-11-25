@@ -12,7 +12,7 @@ This project uses the following technologies:
 2. **Django REST Framework** – For building RESTful APIs  
 3. **PostgreSQL** – Relational database management system  
 4. **Celery** – Asynchronous task queue for background jobs  
-5. **Radis** – In-memory data store for caching and message broker  
+5. **Redis** – In-memory data store for caching and message broker  
 6. **Docker** – Containerization for development and production  
 7. **GitHub Actions** – CI/CD workflow automation
 
