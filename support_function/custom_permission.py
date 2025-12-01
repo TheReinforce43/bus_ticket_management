@@ -12,6 +12,20 @@ class DistrictServiceObjectPermission(BasePermission):
     - Customer: Read-only access
     
     """
+    def has_permission(self, request, view):
+        user = request.user
+
+        # Admin can do anything
+        if user.role == "Admin":
+            return True
+
+        # Staff, Passenger: Only SAFE methods
+        if user.role in ["Staff", "Passenger"]:
+            return request.method in SAFE_METHODS
+
+        # Default deny
+        return False
+
     def has_object_permission(self, request, view, obj):
         user = request.user 
 
