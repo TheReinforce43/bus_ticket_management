@@ -1,17 +1,45 @@
 
-
 services:
   web:
     build: .
-    command : python manage.py runserver 0.0.0.0:8000 
-    volumes: 
-      - .:/app 
-    ports :
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
       - "8000:8000"
     depends_on:
-      - db  
+      - db
+      - redis
     env_file:
       - .env
+
+  celery:
+    build: .
+    command: celery -A bus_ticket_project worker --loglevel=info
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+      - redis
+    env_file:
+      - .env
+
+  celery_beat:
+    build: .
+    command: celery -A bus_ticket_project beat --loglevel=info
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+      - redis
+    env_file:
+      - .env
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+
   db:
     image: postgres:17
     environment:
@@ -20,3 +48,4 @@ services:
       POSTGRES_DB: db_bust_ticket
     ports:
       - "5432:5432"
+
