@@ -43,9 +43,9 @@ services:
   db:
     image: postgres:17
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 164043
-      POSTGRES_DB: db_bust_ticket
+      POSTGRES_USER: ${local_DB_USER}
+      POSTGRES_PASSWORD: ${local_DB_PASSWORD}
+      POSTGRES_DB: ${local_DB_NAME}
     ports:
       - "5432:5432"
 
