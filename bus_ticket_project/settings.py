@@ -20,7 +20,14 @@ import environ
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+from celery.schedules import crontab
 
+CELERY_BEAT_SCHEDULE = {
+    "daily-summary-email": {
+        "task": "bus_ticket_project.tasks.daily_summary_task",
+        "schedule": crontab(hour=8, minute=0),
+    }
+}
 
 
 env = environ.Env()
@@ -264,3 +271,34 @@ DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
 
 
 AUTH_USER_MODEL = 'user.User'
+
+
+
+# logger tracker configuration
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+
+    "formatters": {
+        "standard": {
+            "format": "[{asctime}] {levelname} {name}: {message}",
+            "style": "{"
+        },
+    },
+
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "standard",
+        },
+    },
+
+    "loggers": {
+        "": {
+            "handlers": ["console"],
+            "level": "INFO",
+        },
+    },
+}
+
