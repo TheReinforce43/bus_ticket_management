@@ -39,6 +39,12 @@ class UserSignUpSerializer(serializers.ModelSerializer):
         if len(value) < 3:
             raise serializers.ValidationError("Password must be at least 3 characters long.")
         return value
+    
+    def validate_first_name(self,value):
+        if not value:
+            raise serializers.ValidationError("First name cannot be empty.")
+        
+        return value
 
 
        
@@ -109,6 +115,8 @@ class UserLogoutSerializer(serializers.Serializer):
     def validate(self, attrs):
         self.token = attrs['refresh']
         return attrs
+    
+
 
     def save(self, **kwargs):
         try:
