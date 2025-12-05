@@ -27,20 +27,19 @@ class UserSignUpEmail:
 
     def send_signup_email(self,user):
 
-        # subject = 'Welcome to Bus Ticket Booking System'
-        # message = f'Hi {user.first_name}, thank you for signing up for our Bus Ticket Booking System. We are excited to have you on board!'
-        # from_email = settings.DEFAULT_FROM_EMAIL
-        # recipient_list = [user.email]
-
+     
         html_content =render_to_string(
 
             'signup/signup_templates.html',
             {
-                "user": user
+                "user": user,
+                "year": 2025
             }
         )
 
         text_content = strip_tags(html_content)
+
+        print(f"html_content : {html_content}") 
 
         email = EmailMultiAlternatives(
             subject= 'Welcome to Bus Ticket Booking System',
@@ -60,12 +59,3 @@ class UserSignUpEmail:
 
 
         
-
-        # send_mail(
-        #     subject, 
-        #     message, 
-        #     from_email, 
-        #     recipient_list,
-        #     fail_silently=False
-        #     )
-

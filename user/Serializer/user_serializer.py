@@ -14,6 +14,7 @@ User = get_user_model()
 
 class UserSignUpSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
+    first_name = serializers.CharField(required=True, allow_blank=False)
 
     class Meta:
         model = User
@@ -41,7 +42,7 @@ class UserSignUpSerializer(serializers.ModelSerializer):
         return value
     
     def validate_first_name(self,value):
-        if not value:
+        if not value.strip():
             raise serializers.ValidationError("First name cannot be empty.")
         
         return value

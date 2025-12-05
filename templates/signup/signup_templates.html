@@ -2,47 +2,64 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f6f6f6;
-            padding: 20px;
-        }
-        .container {
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 600px;
-            margin: auto;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        h2 {
-            color: #333333;
-        }
-        p {
-            color: #555555;
-            line-height: 1.6;
-        }
-        .footer {
-            margin-top: 20px;
-            text-align: center;
-            color: #999999;
-            font-size: 12px;
-        }
-    </style>
+    <meta name="color-scheme" content="light">
+    <meta name="supported-color-schemes" content="light">
+    <title>Email Template</title>
 </head>
-<body>
-    <div class="container">
-        <h2>Hello {{ user.first_name }},</h2>
-        <p>🎉 Your account has been created successfully!</p>
-        <p>Welcome to our platform. We are excited to have you with us.</p>
 
-        <p>Best Regards,<br>Team</p>
+<body style="margin:0; padding:0; background:#f3f4f6; font-family:Arial, sans-serif;">
 
-        <div class="footer">
-            © {{ year }} Your Company. All rights reserved.
-        </div>
-    </div>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" 
+           style="background:#f3f4f6; padding:20px 0;">
+        <tr>
+            <td align="center">
+
+                <!-- Main container (footer included inside this table) -->
+                <table width="600" border="0" cellspacing="0" cellpadding="0"
+                       style="background:#ffffff; border-radius:10px; padding:30px; 
+                              box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+
+                    <!-- Header -->
+                    <tr>
+                        <td>
+                            <h2 style="margin:0; color:#111827; font-size:24px; font-weight:700;">
+                                Hello {{ user.first_name }},
+                            </h2>
+                        </td>
+                    </tr>
+
+                    <!-- Body -->
+                    <tr>
+                        <td style="padding-top:20px; color:#374151; font-size:16px; line-height:1.6;">
+                            🎉 Your account has been created successfully!
+                            <br><br>
+                            Welcome to our platform. We are excited to have you with us.  
+                            If you have any questions or need assistance, feel free to reach out.
+                        </td>
+                    </tr>
+
+                    <!-- Closing -->
+                    <tr>
+                        <td style="padding-top:25px; font-size:16px; color:#374151; line-height:1.6;">
+                            Best Regards,<br>
+                            <strong>Team</strong>
+                        </td>
+                    </tr>
+
+                    <!-- Footer (now inside same table) -->
+                    <tr>
+                        <td align="center"
+                            style="padding-top:40px; padding-bottom:10px; 
+                                   color:#6b7280; font-size:12px; line-height:1.5;">
+                            © {{ year }} ReinForce Bus Ticket Project. All rights reserved.
+                        </td>
+                    </tr>
+
+                </table>
+
+            </td>
+        </tr>
+    </table>
+
 </body>
 </html>
