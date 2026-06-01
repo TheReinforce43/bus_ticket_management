@@ -12,12 +12,11 @@ def test_task():
     return "This is a test task from Celery!"
 
 
-@shared_task
-
-def daily_summary_task():
-    logger.info("Daily summary task executed.")
-    # Here you can add the logic for your daily summary email
-    return "Daily summary task completed."
+# @shared_task
+# def daily_summary_task():
+#     logger.info("Daily summary task executed.")
+#     # Here you can add the logic for your daily summary email
+#     return "Daily summary task completed."
 
 
 @shared_task(bind=True,max_retries=5,default_retry_delay=10)

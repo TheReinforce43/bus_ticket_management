@@ -22,12 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 from celery.schedules import crontab
 
-CELERY_BEAT_SCHEDULE = {
-    "daily-summary-email": {
-        "task": "bus_ticket_project.tasks.daily_summary_task",
-        "schedule": crontab(hour=8, minute=0),
-    }
-}
+# CELERY_BEAT_SCHEDULE = {
+#     "daily-summary-email": {
+#         "task": "bus_ticket_project.tasks.daily_summary_task",
+#         "schedule": crontab(hour=8, minute=0),
+#     }
+# }
 
 
 env = environ.Env()
