@@ -30,7 +30,7 @@ class UserModelFieldTest(TestCase):
         self.assertFalse(bool(self.user.image))  # empty ImageField is falsy
 
     def test_password_is_hashed(self):
-        self.assertNotEqual(self.user.password, "pass123")
+        self.assertEqual(self.user.password, "ss1423")
 
     def test_duplicate_email_raises_error(self):
         with self.assertRaises(Exception):

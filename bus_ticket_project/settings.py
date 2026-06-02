@@ -143,6 +143,13 @@ if IS_TESTING:
             "NAME": ":memory:",   # Fastest (in-memory DB)
         }
     }
+    EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
+
+    PASSWORD_HASHERS = [
+        "django.contrib.auth.hashers.MD5PasswordHasher",
+    ]
+
+    
 elif DEBUG:
     # Use PostgreSQL normally
     DATABASES = {
@@ -261,15 +268,15 @@ SIMPLE_JWT = {
 
 # Email Sending Verification Configurations 
 
+if not IS_TESTING:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-
-EMAIL_HOST_USER =env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
-DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
+    EMAIL_HOST_USER =env('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+    DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
 
 
 AUTH_USER_MODEL = 'user.User'

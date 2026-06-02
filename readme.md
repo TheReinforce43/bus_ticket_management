@@ -24,7 +24,7 @@ This project uses the following technologies:
 - Real-time ticket booking and availability updates  
 - Background task processing with Celery  
 - Containerized environment for easy deployment 
-- Adding Proper testing using Django default unit test 
+- Adding Proper testing using Django default unit test
 
 ---
 
