@@ -25,6 +25,7 @@ This project uses the following technologies:
 - Background task processing with Celery  
 - Containerized environment for easy deployment 
 - Adding Proper testing using Django default unit test
+- Cache the data using Redis for faster response on read operation 
 
 ---
 
