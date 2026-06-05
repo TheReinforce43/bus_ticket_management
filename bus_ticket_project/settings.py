@@ -135,6 +135,8 @@ import sys
 
 IS_TESTING = "test" in sys.argv
 
+CACHE_TTL = 60 * 15
+
 if IS_TESTING:
     # Use SQLite for tests
     DATABASES = {
@@ -169,6 +171,7 @@ elif DEBUG:
     CELERY_TASK_SERIALIZER = 'json'
     CELERY_RESULT_SERIALIZER = 'json'
     CELERY_TIMEZONE = 'Asia/Dhaka'
+    
 else :
     
     DATABASES = {
