@@ -22,10 +22,23 @@ class ServiceDistrictViewSet(ModelViewSet):
     queryset = ServiceDistrictModel.objects.select_related('responsiblePerson')
     permission_classes = [DistrictServiceObjectPermission]
 
+
     def get_serializer_class(self):
         if self.action in ['list', 'retrieve']:
             return ServiceDistrictDetailSerializer
         return CreateServiceDistrictSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+
+        if user.role == "Admin":
+            # Admin sees everything
+            return ServiceDistrictModel.objects.select_related('responsiblePerson')
+
+        # Staff / Passenger only see districts where they are the responsiblePerson
+        return ServiceDistrictModel.objects.select_related('responsiblePerson').filter(
+            responsiblePerson=user
+        )
 
     def list(self,request, *args, **kwargs):
         cached_data = cache.get(DISTRICT_LIST_CACHE_KEY)

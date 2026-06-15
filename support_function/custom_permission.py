@@ -36,6 +36,7 @@ class DistrictServiceObjectPermission(BasePermission):
        
         elif user.role in ['Passenger','Staff']:
             if request.method in SAFE_METHODS:
-                return True
+                # Only allow if this user is the responsiblePerson
+                return obj.responsiblePerson_id == user.id
         else:  
             return False
